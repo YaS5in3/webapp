@@ -30,7 +30,7 @@ pipeline {
                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'
             }
         } 
-        
+/*        
        stage('Build'){
             steps{
                 sh 'mvn clean package'
@@ -60,6 +60,6 @@ pipeline {
         }
       }
     }
-         
+*/    
   }
 }
