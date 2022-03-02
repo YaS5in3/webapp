@@ -15,9 +15,7 @@ pipeline {
     
        stage('detect-secrets'){
             steps{
-                sh 'mkdir ./results'
-                sh 'cd results/'
-                sh 'detect-secrets scan > results/.secret.json'
+                sh 'detect-secrets scan > .secret.json'
             }
          }
 
