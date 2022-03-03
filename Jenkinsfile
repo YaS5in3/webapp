@@ -30,7 +30,7 @@ pipeline {
                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'
             }
         } 
-/*        
+       
        stage('Build'){
             steps{
                 sh 'mvn clean package'
@@ -44,7 +44,7 @@ pipeline {
                }
             }
         }    
-
+/* 
     stage ('Deploy-To-Tomcat') {
             steps {
               sshagent(['tomcat']) {
