@@ -76,10 +76,7 @@
             <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
     </div>
-    
-<h1> use this password to authentificate </h1>
-    <h1> user : admin </h1>
-    <h1> password : "Mysecurepassword" </h1>
+   
     <hr>
 
     <footer>
