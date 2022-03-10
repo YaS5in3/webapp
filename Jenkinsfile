@@ -16,6 +16,7 @@ pipeline {
        stage('detect-secrets'){
             steps{
                 sh 'detect-secrets scan > .secret.json'
+                sh 'cat .secret.json'
             }
          }
 
@@ -48,7 +49,7 @@ pipeline {
     stage ('Deploy-To-Tomcat') {
             steps {
               sshagent(['tomcat']) {
-                sh 'scp -o StrictHostKeyChecking=no target/*.war tomcat-vm@13.82.179.59:/prod/apache-tomcat-8.5.76/webapps/webapp.war'
+                sh 'scp -o StrictHostKeyChecking=no target/*.war tomcat-vm@52.186.21.203:/prod/apache-tomcat-8.5.76/webapps/webapp.war'
               }      
            }       
         }
@@ -56,7 +57,7 @@ pipeline {
     stage ('DAST') {
       steps {
         sshagent(['zap']) {
-          sh 'ssh -o  StrictHostKeyChecking=no zap-vm@13.82.182.104 "sudo docker run -t owasp/zap2docker-stable zap-baseline.py -t http://13.82.179.59:8080/webapp/" || true'
+          sh 'ssh -o  StrictHostKeyChecking=no zap-vm@52.186.20.101 "sudo docker run -t owasp/zap2docker-stable zap-baseline.py -t http://52.186.21.203:8080/webapp/" || true'
         }
       }
     }
