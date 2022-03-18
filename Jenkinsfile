@@ -3,6 +3,7 @@ pipeline {
   tools {
     maven 'maven'
   }
+  
   stages {
     stage ('Initialize') {
       steps {
@@ -67,6 +68,13 @@ pipeline {
         }
       }
     }
-   
+    
+    stage('openvas'){
+        steps{
+                sh 'sudo docker exec openvas omp -S 6c698f59-810f-40d7-b1bc-5986170dd246'
+            }
+         }       
+    
+    
   }
 }
