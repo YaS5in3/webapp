@@ -16,7 +16,7 @@ pipeline {
     
     stage('openvas'){
         steps{
-                sh 'sudo docker exec -it openvas omp -S 6c698f59-810f-40d7-b1bc-5986170dd246'
+                sh 'sudo docker exec -it openvas omp -S 6c698f59-810f-40d7-b1bc-5986170dd246 || true'
             }
          }    
 
