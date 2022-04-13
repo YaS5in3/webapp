@@ -1,9 +1,10 @@
 pipeline {
   agent any 
+/*  
   tools {
     maven 'maven'
   }
-  
+*/  
   stages {
     stage ('Initialize') {
       steps {
@@ -13,14 +14,14 @@ pipeline {
             ''' 
       }
     }
-    
+/*     
        stage('detect-secrets'){
             steps{
                 sh 'detect-secrets scan > .secret.json'
                 sh 'cat .secret.json'
             }
          }
-
+*/
         stage ('OWASP Dependency-Check') {
             steps {
                   sh 'wget https://raw.githubusercontent.com/Yassine499/DevSecOps/main/owasp-dependency-check.sh'
@@ -34,7 +35,7 @@ pipeline {
                 sh 'mvn clean package'
             }
          }    
-    
+/*    
         stage('SonarQube analysis') {
             steps{
                 withSonarQubeEnv('sonarqube') { 
@@ -70,7 +71,7 @@ pipeline {
                 sh 'sudo docker exec openvas omp -S 6c698f59-810f-40d7-b1bc-5986170dd246'
             }
          }       
-    
+  */  
     
   }
 }
