@@ -23,13 +23,9 @@ pipeline {
 
         stage ('OWASP Dependency-Check') {
             steps {
-                dependencyCheck additionalArguments: ''' 
-                    -o "./" 
-                    -s "./"
-                    -f "ALL" 
-                    --prettyPrint''', odcInstallation: 'OWASP-DC'
-
-                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+                  sh 'wget https://raw.githubusercontent.com/Yassine499/DevSecOps/main/owasp-dependency-check.sh'
+                  sh 'chmod +x owasp-dependency-check.sh'
+                  sh 'bash owasp-dependency-check.sh'
             }
         } 
        
