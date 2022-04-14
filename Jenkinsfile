@@ -28,7 +28,7 @@ pipeline {
                   sh 'rm owasp-dependency-check.sh || true'
                   sh 'wget https://raw.githubusercontent.com/Yassine499/DevSecOps/main/owasp-dependency-check.sh'
                   sh 'chmod +x owasp-dependency-check.sh'
-                  sh 'bash owasp-dependency-check.sh'
+                  sh 'bash owasp-dependency-check.sh || true'
             }
         } 
        
