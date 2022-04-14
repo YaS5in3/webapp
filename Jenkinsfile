@@ -14,14 +14,14 @@ pipeline {
             ''' 
       }
     }
-/*     
+     
        stage('detect-secrets'){
             steps{
-                sh 'detect-secrets scan > .secret.json'
-                sh 'cat .secret.json'
+                sh 'mkdir -p mkdir reports/detect-secrets'
+                sh '/usr/local/bin/detect-secrets  scan > reports/detect-secrets/secrets.baseline'
             }
          }
-*/
+
         stage ('OWASP Dependency-Check') {
             steps {
                   sh 'mkdir -p reports/owasp-dc || true'
