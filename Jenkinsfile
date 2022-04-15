@@ -37,15 +37,15 @@ pipeline {
                 sh 'mvn clean package'
             }
          }    
-/*    
+   
         stage('SonarQube analysis') {
             steps{
-                withSonarQubeEnv('sonarqube') { 
+                withSonarQubeEnv('sonar') { 
                 sh "mvn sonar:sonar"
                }
             }
         }    
-
+/*
     stage ('Deploy-To-Tomcat') {
             steps {
               sshagent(['tomcat']) {
