@@ -31,7 +31,7 @@ pipeline {
                 sh 'ls'
                }
             }
-        }    
+    
 
     stage ('Deploy-To-Tomcat') {
             steps {
