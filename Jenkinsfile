@@ -51,15 +51,14 @@ pipeline {
                   sh  'sudo cp target/*.war /opt/tomcat10/webapps/webapp.war'     
            }
         }
-/*    
+    
     stage ('DAST') {
       steps {
-        sshagent(['zap']) {
-          sh 'ssh -o  StrictHostKeyChecking=no zap-vm@52.186.20.101 "sudo docker run -t owasp/zap2docker-stable zap-baseline.py -t http://52.186.21.203:8080/webapp/" || true'
-        }
+            sh 'mkdir -p reports/owasp-zap'
+            sh 'docker run -v $(pwd)/reports/owasp-zap/:/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py -t http://10.0.1.19:8085/webapp/ -x owasp-zap-report || true'
       }
     }
-    
+/*    
     stage('openvas'){
         steps{
                 sh 'sudo docker exec openvas omp -S 6c698f59-810f-40d7-b1bc-5986170dd246'
