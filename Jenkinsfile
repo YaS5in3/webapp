@@ -38,22 +38,23 @@ pipeline {
             }
          }    
    
-        stage('SonarQube analysis') {
+        stage('SonarQube Analysis') {
             steps{
                 withSonarQubeEnv('sonarqube') { 
                 sh "mvn sonar:sonar"
                }
             }
         }    
-/*
+
     stage ('Deploy-To-Tomcat') {
             steps {
               sshagent(['tomcat']) {
-                sh 'scp -o StrictHostKeyChecking=no target/*.war tomcat-vm@52.186.21.203:/prod/apache-tomcat-8.5.76/webapps/webapp.war'
+                /* sh 'scp -o StrictHostKeyChecking=no target/*.war tomcat-vm@52.186.21.203:/prod/apache-tomcat-8.5.76/webapps/webapp.war' */
+                   sh  'sudo cp target/*.war /opt/tomcat10/webapps/webapp.war'
               }      
            }       
         }
-    
+/*    
     stage ('DAST') {
       steps {
         sshagent(['zap']) {
