@@ -54,12 +54,6 @@ pipeline {
            }       
         }
     
-       stage('Nikto'){
-            steps{
-                sh 'nikto -h http://52.186.21.203:8080/webapp/ -Plugins robots -output nikto-report.xml'
-            }
-         }
-    
     stage ('DAST') {
       steps {
         sshagent(['zap']) {
