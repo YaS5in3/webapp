@@ -48,7 +48,7 @@ pipeline {
            }
         }
     
-    stage ('DAST') {
+    stage ('OWASP ZAP') {
       steps {
             sh 'mkdir -p reports/owasp-zap' /* xml format didn't work */
             sh 'docker run -v $(pwd)/reports/owasp-zap/:/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py -t http://10.0.1.19:8085/webapp/ -r owasp-zap-report || true'
