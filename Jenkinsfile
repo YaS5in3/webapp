@@ -44,7 +44,7 @@ pipeline {
 
     stage ('Deploy-To-Tomcat') {
             steps {
-                  sh  'sudo cp target/*.war /opt/tomcat10/webapps/webapp.war'     
+                  sh  'cp target/*.war /opt/tomcat10/webapps/webapp.war'     
            }
         }
     
