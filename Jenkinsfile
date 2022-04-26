@@ -54,13 +54,15 @@ pipeline {
             sh 'docker run -v $(pwd)/reports/owasp-zap/:/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py -t http://10.0.1.19:8085/webapp/ -r owasp-zap-report || true'
       }
     }
-/*    
-    stage('openvas'){
-        steps{
-                sh 'sudo docker exec openvas omp -S 6c698f59-810f-40d7-b1bc-5986170dd246'
-            }
-         }       
-  */  
+    
+    stage ('OpenVAS') {
+      steps {
+        sshagent(['ubuntu']) {
+          sh 'ssh -o  StrictHostKeyChecking=no hunter@10.2.1.8 "bash /opt/openvas-script"'
+        }
+      }
+    }     
+  
     
   }
 }
