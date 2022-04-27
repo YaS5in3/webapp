@@ -61,7 +61,15 @@ pipeline {
           sh 'ssh -o  StrictHostKeyChecking=no hunter@10.2.1.8 "bash /opt/openvas-script"'
         }
       }
-    }     
+    } 
+    
+    stage ('Uplaod reports to DefectDojo') {
+      steps {
+            sh 'bash /opt/upload.sh  -h http://10.0.1.19:8080 -s "Detect-secrets Scan" -f reports/detect-secrets/secrets.baseline -e 1'
+            sh 'bash /opt/upload.sh  -h http://10.0.1.19:8080 -s "Dependency Check Scan" -f reports/owasp-dc/dependency-check-report.xml -e 1'
+            sh 'bash /opt/upload.sh  -h http://10.0.1.19:8080 -s "ZAP Scan" -f reports/owasp-zap/owasp-zap-report.xml -e 1 || true'
+      }
+    }
   
     
   }
