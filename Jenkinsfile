@@ -68,6 +68,7 @@ pipeline {
             sh 'bash /opt/upload.sh  -h http://10.0.1.19:8080 -s "Detect-secrets Scan" -f reports/detect-secrets/secrets.baseline -e 1'
             sh 'bash /opt/upload.sh  -h http://10.0.1.19:8080 -s "Dependency Check Scan" -f reports/owasp-dc/dependency-check-report.xml -e 1'
             sh 'bash /opt/upload.sh  -h http://10.0.1.19:8080 -s "ZAP Scan" -f reports/owasp-zap/owasp-zap-report.xml -e 1 || true'
+        /*  sh 'bash /opt/upload.sh  -h http://10.0.1.19:8080 -s "OpenVAS CSV" -f reports/openvas/openvas-report -e 1' */
       }
     }
   
