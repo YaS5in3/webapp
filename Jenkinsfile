@@ -60,7 +60,7 @@ pipeline {
     stage ('OpenVAS') {
       steps {
         sshagent(['ubuntu']) {
-          sh 'ssh -o  StrictHostKeyChecking=no hunter@10.2.1.8 "bash /opt/openvas-script"'
+          sh 'ssh -o  StrictHostKeyChecking=no hunter@10.2.1.8 "bash /opt/start-task.sh"'
         }
       }
     } 
