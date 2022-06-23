@@ -13,7 +13,7 @@ pipeline {
      
        stage('detect-secrets'){
             steps{
-                sh 'mkdir -p mkdir reports/detect-secrets'
+                sh 'mkdir -p reports/detect-secrets'
                 sh '/usr/local/bin/detect-secrets  scan > reports/detect-secrets/secrets.baseline'
             }
          }
