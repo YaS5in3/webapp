@@ -55,12 +55,19 @@ pipeline {
       }
     }
     
+    stage ('Nuclei Scan') {
+      steps {
+          sh 'mkdir -p reports/nuclei'
+          sh 'nuclei -u http://192.168.52.131:8088/webapp/ -fr -json -irr -o reports/nuclei/nuclei-report.json'
+      }
+    }
     
     stage ('Uplaod reports to DefectDojo') {
       steps {
             sh 'bash /opt/upload.sh  -h http://127.0.0.1:8080 -s "Detect-secrets Scan" -f reports/detect-secrets/secrets.baseline -e 27'
             sh 'bash /opt/upload.sh  -h http://127.0.0.1:8080 -s "Dependency Check Scan" -f reports/owasp-dc/dependency-check-report.xml -e 27'
             sh 'bash /opt/upload.sh  -h http://127.0.0.1:8080 -s "ZAP Scan" -f reports/owasp-zap/owasp-zap-report.xml -e 27 || true'
+            sh 'bash /opt/upload.sh  -h http://127.0.0.1:8080 -s "Nuclei Scan" -f  reports/nuclei/nuclei-report.json -e 27'
       }
     }
   
