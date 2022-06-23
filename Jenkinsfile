@@ -51,7 +51,7 @@ pipeline {
     stage ('OWASP ZAP') {
       steps {
           sh 'mkdir -p reports/owasp-zap'
-          sh 'docker run -v $(pwd)/reports/owasp-zap/:/zap/wrk/:rw --user root -t owasp/zap2docker-stable zap-baseline.py -t http://192.168.52.131:8088/webapp/ -x owasp-zap-report'
+          sh 'docker run -v $(pwd)/reports/owasp-zap/:/zap/wrk/:rw --user root -t owasp/zap2docker-stable zap-baseline.py -t http://192.168.52.131:8088/webapp/ -x owasp-zap-report || true'
       }
     }
     
