@@ -50,26 +50,17 @@ pipeline {
     
     stage ('OWASP ZAP') {
       steps {
-        sshagent(['ubuntu']) {
-          sh 'ssh -o  StrictHostKeyChecking=no hunter@10.2.1.8 "mkdir -p reports/owasp-zap"'
-          sh 'ssh -o  StrictHostKeyChecking=no hunter@10.2.1.8 "docker run -v $(pwd)/reports/owasp-zap/:/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py -t http://10.0.1.19:8085/webapp/ -x owasp-zap-report || true"'
-        }
+          sh 'mkdir -p reports/owasp-zap'
+          sh 'docker run -v $(pwd)/reports/owasp-zap/:/zap/wrk/:rw --user root -t owasp/zap2docker-stable zap-baseline.py -t http://127.0.0.1:8088/webapp/ -x owasp-zap-report'
       }
     }
     
-    stage ('OpenVAS') {
-      steps {
-        sshagent(['ubuntu']) {
-          sh 'ssh -o  StrictHostKeyChecking=no hunter@10.2.1.8 "bash /opt/start-task.sh -i c3169601-e987-4393-a8cb-c3df5cf6c56f"'
-        }
-      }
-    } 
     
     stage ('Uplaod reports to DefectDojo') {
       steps {
-            sh 'bash /opt/upload.sh  -h http://10.0.1.19:8080 -s "Detect-secrets Scan" -f reports/detect-secrets/secrets.baseline -e 1'
-            sh 'bash /opt/upload.sh  -h http://10.0.1.19:8080 -s "Dependency Check Scan" -f reports/owasp-dc/dependency-check-report.xml -e 1'
-            sh 'bash /opt/upload.sh  -h http://10.0.1.19:8080 -s "ZAP Scan" -f reports/owasp-zap/owasp-zap-report.xml -e 1 || true'
+            sh 'bash /opt/upload.sh  -h http://127.0.0.1:8080 -s "Detect-secrets Scan" -f reports/detect-secrets/secrets.baseline -e 1'
+            sh 'bash /opt/upload.sh  -h http://127.0.0.1:8080 -s "Dependency Check Scan" -f reports/owasp-dc/dependency-check-report.xml -e 1'
+            sh 'bash /opt/upload.sh  -h http://127.0.0.1:8080 -s "ZAP Scan" -f reports/owasp-zap/owasp-zap-report.xml -e 1 || true'
       }
     }
   
